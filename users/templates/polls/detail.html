@@ -1,5 +1,6 @@
 {% extends "users/base.html" %}
-<a href="{% url 'users-home' %}" class="nav-item nav-link">Home</a>
+{% block content %}
+<div class="jumbotron">
 <form action="{% url 'vote' question.id %}" method="post">
     {% csrf_token %}
     <fieldset>
@@ -14,3 +15,5 @@
     </fieldset>
 <input type="submit" value="Vote">
 </form>
+</div>
+{% endblock %}

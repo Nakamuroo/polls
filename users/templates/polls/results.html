@@ -1,9 +1,12 @@
 {% extends "users/base.html" %}
-<a href="{% url 'users-home' %}" class="nav-item nav-link">Home</a>
+{% block content %}
+<div class="jumbotron">
 <h1>{{ question.question_text }}</h1>
 <ul>
     {% for choice in question.choice_set.all %}
     <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{choice.votes|pluralize}}</li>
     {% endfor %}
 </ul>
-<a href="{% url 'detail'  question.id %}">выбрать еще раз? </a>
+<a class="btn btn-primary btn-lg" href="{% url 'detail'  question.id %}" role="button">Выбрать еще раз?</a>
+</div>
+{% endblock %}

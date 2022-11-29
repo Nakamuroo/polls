@@ -1,8 +1,10 @@
 {% extends 'users/base.html' %}
 {% block title %}Deleted{% endblock %}
 {% block content %}
-<div id="account_deleted_div">
-    <h1>Your account has been successfully deleted!</h1>
-    <a href="{% url 'users-register' %}" class="button">Зарегестрироваться</a>
+<div class="jumbotron">
+    <div id="account_deleted_div">
+        <h1>Your account has been successfully deleted!</h1>
+        <a class="btn btn-primary btn-lg" href="{% url 'users-register' %}" role="button">Зарегестрироваться</a>
+    </div>
 </div>
 {% endblock %}
