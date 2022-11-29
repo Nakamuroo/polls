@@ -133,3 +133,9 @@ def vote(request, question_id):
         selected_choice.votes += 1
         selected_choice.save()
         return HttpResponseRedirect(reverse('results', args=(question.id,)))
+
+
+@login_required
+def profileDelete(request):
+    request.user.delete()
+    return render(request, 'users/user_deleted.html')
