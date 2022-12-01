@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-
 from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
@@ -33,17 +32,33 @@ class Question(models.Model):
     life_time = models.DateTimeField(default=datetime.now() + timedelta(days=1),
                                      verbose_name='Время жизни',
                                      null=False)
+    votes = models.IntegerField(default=0)
+    img = models.ImageField(null=True, default='default.jpg', upload_to="images/question")
+    description = models.TextField(max_length=600, null=True)
+    description2 = models.TextField(max_length=600, null=True)
+    
     def was_published_recently(self):
         return self.pub_date >= datetime.now() - timedelta(days=1)
 
     def __str__(self):
         return self.question_text
 
-
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
 
+    def percentage(self):
+        all_votes = Choice.objects.all()
+        votes_count = 0
+        for obj in all_votes:
+            votes_count += obj.votes
+        if self.votes != 0: 
+            return round((self.votes / votes_count) * 100)
+        else:
+            return 0
+
     def __str__(self):
         return self.choice_text
+    
+    

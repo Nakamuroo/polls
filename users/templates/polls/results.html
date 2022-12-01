@@ -4,9 +4,9 @@
 <h1>{{ question.question_text }}</h1>
 <ul>
     {% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{choice.votes|pluralize}}</li>
+    <li><h6>{{ choice.choice_text }} -- {{ choice.votes }} vote{{choice.votes|pluralize}} ({{choice.percentage}}%)</h6></li>
     {% endfor %}
 </ul>
-<a class="btn btn-primary btn-lg" href="{% url 'detail'  question.id %}" role="button">Выбрать еще раз?</a>
+<a class="btn btn-dark btn-lg" href="{% url 'index' %}" role="button">Вернуться на главную</a>
 </div>
 {% endblock %}
